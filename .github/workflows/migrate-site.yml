@@ -1,0 +1,37 @@
+name: Migrate felchamaa.com
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/migrate-site.yml"
+      - "migration/**"
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build static site from current WordPress site
+        run: python3 migration/build_static.py
+      - name: Verify generated site
+        run: |
+          test -f docs/index.html
+          test -f docs/paintings/index.html
+          test -f docs/about/index.html
+          test -f docs/contact/index.html
+          test -f docs/CNAME
+          test "$(find docs -type f | wc -l)" -gt 200
+          ! grep -R -q 'cdn-reach.hostinger.com' docs
+          python3 migration/check_static.py
+      - name: Commit generated site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs migration/manifest.json migration/site-urls.txt
+          git diff --cached --quiet || git commit -m "Migrate felchamaa.com static site"
+          git push
