@@ -5,9 +5,9 @@ const menuButton=document.querySelector('.menu-button'),mobileMenu=document.quer
 if(menuButton&&mobileMenu){menuButton.addEventListener('click',()=>{const open=mobileMenu.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.textContent=open?'Close':'Menu';document.body.style.overflow=open?'hidden':''});mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileMenu.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.textContent='Menu';document.body.style.overflow=''}));}
 const viewer=document.getElementById('viewer');
 if(viewer){
-  const image=document.getElementById('viewer-image'),title=document.getElementById('viewer-title'),meta=document.getElementById('viewer-meta'),close=document.getElementById('viewer-close');
+  const image=document.getElementById('viewer-image'),media=viewer.querySelector('.viewer-media'),title=document.getElementById('viewer-title'),meta=document.getElementById('viewer-meta'),close=document.getElementById('viewer-close');
   const works=[...document.querySelectorAll('.js-view')];
-  let prior=null,current=0,touchX=0,touchY=0;
+  let prior=null,current=0,touchX=0,touchY=0,mouseX=0,mouseY=0,wheelX=0,wheelTimer=null;
   const show=index=>{
     current=(index+works.length)%works.length;
     const button=works[current],source=button.querySelector('img');
@@ -23,5 +23,10 @@ if(viewer){
   viewer.addEventListener('click',event=>{if(event.target===viewer)shut()});
   viewer.addEventListener('touchstart',event=>{const touch=event.changedTouches[0];touchX=touch.clientX;touchY=touch.clientY},{passive:true});
   viewer.addEventListener('touchend',event=>{if(!viewer.classList.contains('open'))return;const touch=event.changedTouches[0],dx=touch.clientX-touchX,dy=touch.clientY-touchY;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){show(current+(dx<0?1:-1))}},{passive:true});
+  media.addEventListener('pointerdown',event=>{if(event.pointerType!=='mouse'||event.button!==0)return;mouseX=event.clientX;mouseY=event.clientY;media.classList.add('dragging')});
+  media.addEventListener('pointerup',event=>{if(event.pointerType!=='mouse'||!media.classList.contains('dragging'))return;media.classList.remove('dragging');const dx=event.clientX-mouseX,dy=event.clientY-mouseY;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))show(current+(dx<0?1:-1))});
+  media.addEventListener('pointercancel',()=>media.classList.remove('dragging'));
+  media.addEventListener('dragstart',event=>event.preventDefault());
+  media.addEventListener('wheel',event=>{if(Math.abs(event.deltaX)<=Math.abs(event.deltaY))return;wheelX+=event.deltaX;clearTimeout(wheelTimer);wheelTimer=setTimeout(()=>wheelX=0,180);if(Math.abs(wheelX)>60){show(current+(wheelX>0?1:-1));wheelX=0}},{passive:true});
   addEventListener('keydown',event=>{if(!viewer.classList.contains('open'))return;if(event.key==='Escape')shut();if(event.key==='ArrowRight')show(current+1);if(event.key==='ArrowLeft')show(current-1)});
 }
