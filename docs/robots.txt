@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://felchamaa.com/sitemap.xml
