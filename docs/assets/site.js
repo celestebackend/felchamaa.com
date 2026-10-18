@@ -3,6 +3,31 @@ const header=document.querySelector('.header');
 if(header)addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>18),{passive:true});
 const menuButton=document.querySelector('.menu-button'),mobileMenu=document.querySelector('.mobile-menu');
 if(menuButton&&mobileMenu){menuButton.addEventListener('click',()=>{const open=mobileMenu.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.textContent=open?'Close':'Menu';document.body.style.overflow=open?'hidden':''});mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileMenu.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.textContent='Menu';document.body.style.overflow=''}));}
+document.querySelectorAll('.gallery').forEach(gallery=>{
+  const buckets={landscape:[],square:[],portrait:[],small:[]};
+  [...gallery.querySelectorAll('.work')].forEach(work=>{
+    const meta=work.querySelector('.js-view')?.dataset.meta||'';
+    const dimensions=meta.match(/([0-9.]+)\s*×\s*([0-9.]+)\s*cm/i);
+    let group='landscape';
+    if(dimensions){
+      const height=Number(dimensions[1]),width=Number(dimensions[2]);
+      if(height<=30&&width<=30)group='small';
+      else if(Math.abs(height-width)/Math.max(height,width)<=.08)group='square';
+      else group=height>width?'portrait':'landscape';
+    }
+    buckets[group].push(work);
+  });
+  const labels={landscape:'Landscape-format paintings',square:'Large square-format paintings',portrait:'Portrait-format paintings',small:'Paintings measuring 30 × 30 cm or less'};
+  const sections=['landscape','square','portrait','small'].filter(group=>buckets[group].length).map(group=>{
+    const section=document.createElement('section');
+    section.className=`format-group format-group-${group}`;
+    section.setAttribute('aria-label',labels[group]);
+    section.append(...buckets[group]);
+    return section;
+  });
+  gallery.replaceChildren(...sections);
+  gallery.classList.add('grouped-gallery');
+});
 const viewer=document.getElementById('viewer');
 if(viewer){
   const image=document.getElementById('viewer-image'),media=viewer.querySelector('.viewer-media'),title=document.getElementById('viewer-title'),meta=document.getElementById('viewer-meta'),close=document.getElementById('viewer-close'),previous=document.getElementById('viewer-prev'),next=document.getElementById('viewer-next');
