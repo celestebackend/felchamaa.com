@@ -48,10 +48,5 @@ main{padding-top:72px}.home{min-height:100svh;padding:clamp(105px,11vw,160px) va
   .page-intro h1{font-size:34px}
   .format-group{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 16px}
   .format-group-small{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 12px}
-  .viewer{overflow-y:auto}
-  .viewer.open{display:block}
-  .viewer-media{height:auto;min-height:0;overflow:visible}
-  .viewer-media img{width:auto;height:auto;max-width:100%;max-height:none;object-fit:contain;margin:0 auto}
-  .viewer-info{position:static;background:transparent;margin-top:24px}
   .viewer-arrows{display:none}
 }
