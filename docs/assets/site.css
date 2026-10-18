@@ -106,3 +106,6 @@ main{padding-top:72px}.home{min-height:100svh;padding:clamp(105px,11vw,160px) va
   .grouped-gallery .format-group{grid-template-columns:repeat(2,minmax(0,1fr))}
   .grouped-gallery .format-group-small{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
+
+/* Artwork captions show dimensions alone. */
+.work figcaption.work-size{display:block;margin:9px 0 0;text-align:center;font-size:11px;line-height:1.5;color:var(--quiet)}

@@ -38,7 +38,7 @@ if(viewer){
     image.src=source.currentSrc||source.src;
     image.alt=source.alt;
     title.textContent=button.dataset.title;
-    meta.textContent=button.dataset.meta;
+    meta.textContent=button.dataset.meta.match(/[0-9.]+\s*×\s*[0-9.]+\s*cm/i)?.[0]||'';
     [works[(current+1)%works.length],works[(current-1+works.length)%works.length]].forEach(item=>{const src=item?.querySelector('img')?.src;if(src)(new Image()).src=src});
   };
   works.forEach((button,index)=>button.addEventListener('click',()=>{prior=button;show(index);viewer.classList.add('open');document.body.style.overflow='hidden';close.focus()}));
