@@ -4,23 +4,22 @@ if(header)addEventListener('scroll',()=>header.classList.toggle('scrolled',scrol
 const menuButton=document.querySelector('.menu-button'),mobileMenu=document.querySelector('.mobile-menu');
 if(menuButton&&mobileMenu){menuButton.addEventListener('click',()=>{const open=mobileMenu.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.textContent=open?'Close':'Menu';document.body.style.overflow=open?'hidden':''});mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileMenu.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.textContent='Menu';document.body.style.overflow=''}));}
 document.querySelectorAll('.gallery').forEach(gallery=>{
-  const buckets={landscape:[],square:[],portrait:[],small:[]};
+  const buckets={landscape:[],square:[],portrait:[],'small-landscape':[],'small-portrait':[],'small-square':[]};
   [...gallery.querySelectorAll('.work')].forEach(work=>{
     const meta=work.querySelector('.js-view')?.dataset.meta||'';
     const dimensions=meta.match(/([0-9.]+)\s*×\s*([0-9.]+)\s*cm/i);
     let group='landscape';
     if(dimensions){
       const height=Number(dimensions[1]),width=Number(dimensions[2]);
-      if(height<=30&&width<=30)group='small';
-      else if(Math.abs(height-width)/Math.max(height,width)<=.08)group='square';
-      else group=height>width?'portrait':'landscape';
+      const format=Math.abs(height-width)/Math.max(height,width)<=.08?'square':height>width?'portrait':'landscape';
+      group=height<=30&&width<=30?`small-${format}`:format;
     }
     buckets[group].push(work);
   });
-  const labels={landscape:'Landscape-format paintings',square:'Large square-format paintings',portrait:'Portrait-format paintings',small:'Paintings measuring 30 × 30 cm or less'};
-  const sections=['landscape','square','portrait','small'].filter(group=>buckets[group].length).map(group=>{
+  const labels={landscape:'Landscape-format paintings',square:'Large square-format paintings',portrait:'Portrait-format paintings','small-landscape':'Small landscape-format paintings','small-portrait':'Small portrait-format paintings','small-square':'Small square-format paintings'};
+  const sections=['landscape','square','portrait','small-landscape','small-portrait','small-square'].filter(group=>buckets[group].length).map(group=>{
     const section=document.createElement('section');
-    section.className=`format-group format-group-${group}`;
+    section.className=`format-group format-group-${group}${group.startsWith('small-')?' format-group-small':''}`;
     section.setAttribute('aria-label',labels[group]);
     section.append(...buckets[group]);
     return section;
