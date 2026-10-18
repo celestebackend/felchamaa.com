@@ -69,8 +69,9 @@ main{padding-top:72px}.home{min-height:100svh;padding:clamp(105px,11vw,160px) va
 .contact-email{align-self:flex-start;margin-top:clamp(80px,12vh,140px);font-size:clamp(23px,2.4vw,32px);letter-spacing:-.035em;line-height:1.2}
 .contact-social{justify-content:flex-start;gap:30px;margin-top:32px;flex-wrap:wrap}
 @media(min-width:761px){
+  .home{grid-template-rows:auto 1fr}
   .home-art{grid-column:2/span 8;grid-row:1;width:min(565px,100%)}
-  .home-line{grid-column:10/-1;grid-row:1;margin:0 0 -64px;font-size:clamp(22px,2.4vw,34px)}
+  .home-line{grid-column:9/-1;grid-row:1;margin:0;transform:translateY(calc(100% + 10px));font-size:clamp(22px,2.4vw,34px)}
   .home-footer{grid-row:2}
   .format-group{gap:32px}
   .format-group+.format-group{margin-top:58px}
