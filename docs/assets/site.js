@@ -3,25 +3,6 @@ const header=document.querySelector('.header');
 if(header)addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>18),{passive:true});
 const menuButton=document.querySelector('.menu-button'),mobileMenu=document.querySelector('.mobile-menu');
 if(menuButton&&mobileMenu){menuButton.addEventListener('click',()=>{const open=mobileMenu.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.textContent=open?'Close':'Menu';document.body.style.overflow=open?'hidden':''});mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileMenu.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.textContent='Menu';document.body.style.overflow=''}));}
-const galleryDesktop=matchMedia('(min-width:761px)');
-const fitGalleryWorks=()=>document.querySelectorAll('.gallery .work').forEach(work=>{
-  if(work.closest('.small-grid'))return;
-  const art=work.querySelector('.art-button img');
-  if(!art)return;
-  if(!galleryDesktop.matches){work.style.removeProperty('width');return}
-  const fit=()=>{
-    if(!art.naturalWidth||!art.naturalHeight)return;
-    const declared=parseFloat(getComputedStyle(work).getPropertyValue('--art-width'))||work.getBoundingClientRect().width;
-    const ratio=art.naturalHeight/art.naturalWidth;
-    const heightCap=ratio>1.12?Math.min(380,innerHeight*.45):ratio>.9?Math.min(420,innerHeight*.5):Infinity;
-    const fitted=Math.min(declared,heightCap/ratio);
-    work.style.width=`min(${fitted.toFixed(1)}px,100%)`;
-  };
-  if(art.complete)fit();else art.addEventListener('load',fit,{once:true});
-});
-fitGalleryWorks();
-galleryDesktop.addEventListener('change',fitGalleryWorks);
-addEventListener('resize',fitGalleryWorks,{passive:true});
 const viewer=document.getElementById('viewer');
 if(viewer){
   const image=document.getElementById('viewer-image'),media=viewer.querySelector('.viewer-media'),title=document.getElementById('viewer-title'),meta=document.getElementById('viewer-meta'),close=document.getElementById('viewer-close'),previous=document.getElementById('viewer-prev'),next=document.getElementById('viewer-next');
