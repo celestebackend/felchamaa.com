@@ -50,3 +50,44 @@ main{padding-top:72px}.home{min-height:100svh;padding:clamp(105px,11vw,160px) va
   .format-group-small{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 12px}
   .viewer-arrows{display:none}
 }
+
+/* Design refinements: quieter contact, readable text and tighter page rhythm. */
+.nav{font-size:12px;letter-spacing:.1em}
+.nav a{color:#625f59}
+.viewer-arrow{border:0}
+.viewer-arrow:hover{background:rgba(21,21,21,.04)}
+.viewer-arrow:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
+.viewer-info p{font-size:14px;color:#625f59;line-height:1.55}
+.year-items strong,.year-items span{display:block}
+.year-items span{margin-top:4px}
+.year-items p{margin-bottom:22px}
+.year-items p:last-child{margin-bottom:0}
+.about-copy{font-size:16px;line-height:1.65}
+.publication-cover{margin:0}
+.publication-copy{padding-top:0}
+.contact-page{justify-content:flex-start}
+.contact-email{align-self:flex-start;margin-top:clamp(80px,12vh,140px);font-size:clamp(23px,2.4vw,32px);letter-spacing:-.035em;line-height:1.2}
+.contact-social{justify-content:flex-start;gap:30px;margin-top:32px;flex-wrap:wrap}
+@media(min-width:761px){
+  .home-art{grid-column:2/span 8;grid-row:1;width:min(565px,100%)}
+  .home-line{grid-column:10/-1;grid-row:1;margin:0 0 -64px;font-size:clamp(22px,2.4vw,34px)}
+  .home-footer{grid-row:2}
+  .format-group{gap:32px}
+  .format-group+.format-group{margin-top:58px}
+  .format-group+.format-group-small{margin-top:80px}
+  .format-group-small{gap:28px 24px}
+  .about-copy{grid-column:6/span 6}
+  .about-lead{margin-bottom:64px}
+  .about-image{margin-bottom:100px}
+  .text-page:has(.publication-grid) .page-intro{margin-bottom:95px}
+  .publication-cover{width:240px;max-width:100%;justify-self:center}
+  .publication-copy .subtitle{margin-bottom:32px}
+  .site-footer{padding-left:max(24px,calc((100% - 900px)/2));padding-right:max(24px,calc((100% - 900px)/2))}
+}
+@media(max-width:760px){
+  .contact-email{font-size:clamp(22px,6vw,30px);margin-top:80px}
+  .contact-social{flex-direction:column;gap:18px}
+  .publication-cover{margin:0}
+  .publication-copy{padding-top:36px}
+  .viewer-info p{font-size:13px}
+}
