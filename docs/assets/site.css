@@ -93,18 +93,16 @@ main{padding-top:72px}.home{min-height:100svh;padding:clamp(105px,11vw,160px) va
   .viewer-info p{font-size:13px}
 }
 
-/* Measure gallery gutters from image edges, without square image slots. */
+/* Centre paintings within rows while preserving every image's proportions. */
 .gallery.grouped-gallery{--work-gap:32px;--group-gap:64px}
-.grouped-gallery .format-group{display:block;columns:3;column-gap:var(--work-gap)}
-.grouped-gallery .format-group-small{columns:4}
+.grouped-gallery .format-group{display:grid;columns:auto;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--work-gap);align-items:center;margin-bottom:0}
+.grouped-gallery .format-group-small{grid-template-columns:repeat(4,minmax(0,1fr))}
 .grouped-gallery .format-group+.format-group{margin-top:var(--group-gap)}
-.grouped-gallery .format-group .work{display:block;width:100%;margin:0 0 var(--work-gap);break-inside:avoid;grid-column:auto}
+.grouped-gallery .format-group .work{display:block;width:100%;margin:0;align-self:center;grid-column:auto}
 .grouped-gallery .format-group .art-button{position:static;aspect-ratio:auto;overflow:visible}
 .grouped-gallery .format-group .art-button img{position:static;inset:auto;width:100%;height:auto;max-width:100%;object-fit:contain}
-/* The final item in each column needs no extra bottom gutter. */
-.grouped-gallery .format-group{margin-bottom:calc(-1 * var(--work-gap))}
 @media(max-width:760px){
   .gallery.grouped-gallery{--work-gap:18px;--group-gap:36px}
-  .grouped-gallery .format-group{columns:2}
-  .grouped-gallery .format-group-small{columns:3}
+  .grouped-gallery .format-group{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grouped-gallery .format-group-small{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
