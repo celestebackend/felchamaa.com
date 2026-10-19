@@ -1,1 +1,65 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fadi Elchamaa — Painter, Beirut</title><meta name="description" content="Official website of Lebanese painter Fadi Elchamaa, based in Beirut."><link rel="stylesheet" href="/assets/site.css?v=20261019-2"></head><body><header class="header"><div class="identity"><a href="/" aria-label="Fadi Elchamaa home"><img src="https://felchamaa.com/wp-content/uploads/cropped-elchamaa-logo-114x38.png" alt="Fadi Elchamaa Arabic logo"></a></div><nav class="nav" aria-label="Primary navigation"><a href="/paintings/">Paintings</a><a href="/about/">About</a><a href="/exhibitions/">Exhibitions</a><a href="/contact/">Contact</a></nav><button class="menu-button" aria-expanded="false" aria-controls="mobile-menu">Menu</button></header><nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation"><a href="/paintings/">Paintings</a><a href="/about/">About</a><a href="/exhibitions/">Exhibitions</a><a href="/contact/">Contact</a><a class="secondary" href="/publications/">Publications</a></nav><main class="home" id="main"><figure class="home-art"><a href="/paintings/"><img src="https://felchamaa.com/wp-content/uploads/1000150779.jpg" alt="Innominate #21269 by Fadi Elchamaa"></a></figure><p class="home-line"><a href="/paintings/">in the presence<br>of light</a></p><div class="home-footer"><span>Fadi Elchamaa · Painter</span></div></main><footer class="site-footer"><span>© 2026 Fadi Elchamaa · Beirut</span></footer><script src="/assets/site.js?v=20261019-2"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Fadi Elchamaa — Painter, Beirut</title>
+  <meta name="description" content="Official website of Lebanese painter Fadi Elchamaa, based in Beirut.">
+  <link rel="preload" as="image" href="/assets/landing-studio.jpg">
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #111; }
+    body { font-family: Arial, Helvetica, sans-serif; }
+    .landing { position: relative; width: 100vw; height: 100vh; height: 100dvh; overflow: hidden; isolation: isolate; }
+    .landing-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: -2; }
+    .landing::after { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(0,0,0,.08); pointer-events: none; }
+    .artist-name, .enter {
+      position: absolute;
+      left: 50%;
+      margin: 0;
+      color: #fff;
+      font-size: clamp(.72rem, 1.1vw, 1rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      text-shadow: 0 1px 8px rgba(0,0,0,.45);
+      white-space: nowrap;
+      transform: translateX(-50%);
+    }
+    .artist-name { top: max(2.4rem, env(safe-area-inset-top)); }
+    .enter {
+      top: 50%;
+      padding: 1.2rem;
+      color: #fff;
+      text-decoration: none;
+      transform: translate(-50%,-50%);
+      transition: opacity .2s ease;
+    }
+    .enter:hover, .enter:focus-visible { opacity: .65; }
+    .enter:focus-visible { outline: 1px solid rgba(255,255,255,.8); outline-offset: .2rem; }
+    @media (min-width: 768px) and (orientation: landscape) {
+      .landing-photo {
+        inset: 50% auto auto 50%;
+        width: 100vh;
+        width: 100dvh;
+        height: 100vw;
+        max-width: none;
+        transform: translate(-50%,-50%) rotate(90deg);
+      }
+      .artist-name { top: 4.2vh; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .enter { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="landing">
+    <img class="landing-photo" src="/assets/landing-studio.jpg" alt="">
+    <h1 class="artist-name">Fadi Elchamaa</h1>
+    <a class="enter" href="/paintings/" aria-label="Enter Fadi Elchamaa's website">Enter</a>
+  </main>
+</body>
+</html>
