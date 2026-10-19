@@ -66,7 +66,7 @@ main{padding-top:72px}.home{min-height:100svh;padding:clamp(105px,11vw,160px) va
 .publication-cover{margin:0}
 .publication-copy{padding-top:0}
 .contact-page{justify-content:flex-start}
-.contact-email{align-self:flex-start;margin-top:clamp(80px,12vh,140px);font-size:clamp(23px,2.4vw,32px);letter-spacing:-.035em;line-height:1.2}
+.contact-email{align-self:flex-start;margin-top:clamp(80px,12vh,140px);font-size:clamp(18px,2vw,26px);letter-spacing:-.025em;line-height:1.2}
 .contact-social{justify-content:flex-start;gap:30px;margin-top:32px;flex-wrap:wrap}
 @media(min-width:761px){
   .home{grid-template-rows:auto 1fr}
@@ -86,7 +86,7 @@ main{padding-top:72px}.home{min-height:100svh;padding:clamp(105px,11vw,160px) va
   .site-footer{padding-left:max(24px,calc((100% - 900px)/2));padding-right:max(24px,calc((100% - 900px)/2))}
 }
 @media(max-width:760px){
-  .contact-email{font-size:clamp(22px,6vw,30px);margin-top:80px}
+  .contact-email{font-size:clamp(18px,5vw,24px);margin-top:80px}
   .contact-social{flex-direction:column;gap:18px}
   .publication-cover{margin:0}
   .publication-copy{padding-top:36px}
